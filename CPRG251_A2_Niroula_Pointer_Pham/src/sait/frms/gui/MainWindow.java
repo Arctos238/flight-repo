@@ -73,7 +73,7 @@ public class MainWindow extends JFrame {
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	public MainWindow() throws FileNotFoundException, InvalidFlightCodeException {
+	public MainWindow() throws FileNotFoundException{
 		this.flightManager = new FlightManager();
 		this.reservationManager = new ReservationManager();
 

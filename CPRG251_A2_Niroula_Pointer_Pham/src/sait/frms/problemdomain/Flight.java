@@ -19,6 +19,8 @@ public class Flight {
 			double costPerSeat) throws InvalidFlightCodeException  {
 		
 		this.code = code;
+		parseCode();
+		
 		this.airlineName = airlineName;
 		this.from = from;
 		this.to = to;
@@ -26,7 +28,6 @@ public class Flight {
 		this.time = time;
 		this.seats = seats;
 		this.costPerSeat = costPerSeat;
-		parseCode();
 	}
 
 	public String getCode() {
@@ -64,7 +65,7 @@ public class Flight {
 
 	private void parseCode() throws InvalidFlightCodeException {
 		Pattern p = Pattern.compile("[A-Z]{2}-[0-9]{4}");
-		Matcher matcher = p.matcher(code);
+		Matcher matcher = p.matcher(this.code);
 		boolean check = matcher.matches();
 		if (!check) {
 			throw new InvalidFlightCodeException("Invalid Flight Code");

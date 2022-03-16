@@ -22,9 +22,7 @@ public class AppDriver {
 		mainWindow.display();
 		} catch(FileNotFoundException e) {
 			System.out.println("Cannot find the flight information file");
-		} catch(InvalidFlightCodeException e) {
-			System.out.println("Flight file contain invalid flight code");
-		}
+		} 
 	}
 
 }

@@ -14,7 +14,7 @@ public class FlightManager {
 	private final String AIRPORTS_FILENAME = "res/airports.csv";
 	private final String FLIGHTS_FILENAME = "res/flights.csv";
 
-	public FlightManager() throws FileNotFoundException, InvalidFlightCodeException {
+	public FlightManager() throws FileNotFoundException {
 		populateAirports();
 		populateFlights();
 	}
@@ -31,7 +31,7 @@ public class FlightManager {
 		airportFileReader.close();
 	}
 
-	private void populateFlights() throws FileNotFoundException, InvalidFlightCodeException {
+	private void populateFlights() throws FileNotFoundException {
 		Scanner flightFileReader = loadFileIntoScanner(FLIGHTS_FILENAME);
 
 		while (flightFileReader.hasNext()) {
@@ -43,16 +43,13 @@ public class FlightManager {
 			String time = flightFileReader.next();
 			int seats = flightFileReader.nextInt();
 			double costPerSeat = flightFileReader.nextDouble();
-				
-			Pattern p = Pattern.compile("[A-Z]{2}-[0-9]{4}");
-			Matcher matcher = p.matcher(code);
-			boolean check = matcher.matches();
-//			System.out.println(check);
-			if (!check) {
-				throw new InvalidFlightCodeException("Invalid Flight Code");
-			} else {
+
+			try {
 				Flight flight = new Flight(code, airlineName, from, to, weekday, time, seats, costPerSeat);
 				flights.add(flight);
+			} catch (InvalidFlightCodeException e) {
+				System.out
+						.println("Flight file contains the flight code: " + code + ", this is an invalid flight code");
 			}
 		}
 
