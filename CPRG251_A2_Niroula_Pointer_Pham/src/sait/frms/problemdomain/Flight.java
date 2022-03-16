@@ -1,5 +1,10 @@
 package sait.frms.problemdomain;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import sait.frms.exception.InvalidFlightCodeException;
+
 public class Flight {
 	private String code;
 	private String airlineName;
@@ -11,8 +16,8 @@ public class Flight {
 	private double costPerSeat;
 
 	public Flight(String code, String airlineName, String from, String to, String weekday, String time, int seats,
-			double costPerSeat) {
-
+			double costPerSeat) throws InvalidFlightCodeException  {
+		
 		this.code = code;
 		this.airlineName = airlineName;
 		this.from = from;
@@ -21,6 +26,7 @@ public class Flight {
 		this.time = time;
 		this.seats = seats;
 		this.costPerSeat = costPerSeat;
+		parseCode();
 	}
 
 	public String getCode() {
@@ -55,16 +61,15 @@ public class Flight {
 		return costPerSeat;
 	}
 
-//	/** 
-//	 * Parses the code by taking the first char of code and then assigning airlineName a string containing
-//	 * its correct airline.
-//	 */
-//	private void parseCode() {
-//		char airlineCode = code.charAt(0);
-//		
-//		airlineName = (airlineCode == 'O') ? "Otta Airlines" : (airlineCode == 'C') ? "Conned Air"
-//					  : (airlineCode == 'T') ? "Try a Bus Airways" : "Vertical Airways";
-//	}
+
+	private void parseCode() throws InvalidFlightCodeException {
+		Pattern p = Pattern.compile("[A-Z]{2}-[0-9]{4}");
+		Matcher matcher = p.matcher(code);
+		boolean check = matcher.matches();
+		if (!check) {
+			throw new InvalidFlightCodeException("Invalid Flight Code");
+		}
+	}
 
 	@Override
 	public String toString() {
