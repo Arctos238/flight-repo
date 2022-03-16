@@ -47,7 +47,7 @@ public class FlightManager {
 			Pattern p = Pattern.compile("[A-Z]{2}-[0-9]{4}");
 			Matcher matcher = p.matcher(code);
 			boolean check = matcher.matches();
-			System.out.println(check);
+//			System.out.println(check);
 			if (!check) {
 				throw new InvalidFlightCodeException("Invalid Flight Code");
 			} else {
