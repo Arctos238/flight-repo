@@ -326,6 +326,7 @@ public class ReservationsTab extends TabBase {
 				flightJField.setText("");
 				costJField.setText("");
 				airlineJField.setText("");
+				statusJComboBox.setSelectedIndex(0);
 			}
 
 		}
@@ -347,6 +348,7 @@ public class ReservationsTab extends TabBase {
 				costJField.setText("$" + reservation.getCost());
 				nameJField.setText(reservation.getName());
 				citizenJField.setText(reservation.getCitzenship());
+				statusJComboBox.setSelectedIndex((reservation.isActive()) ? 0 : 1 );
 			} catch (NullPointerException exception) {
 
 			}
