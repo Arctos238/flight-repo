@@ -1,5 +1,12 @@
 package sait.frms.application;
 
+/**
+ * @author J.Pointer
+ * @author H.Pham
+ * @author B.Niroula
+ * @version 21/03/2022
+ */
+
 import sait.frms.exception.InvalidFlightCodeException;
 import sait.frms.gui.MainWindow;
 
