@@ -364,7 +364,7 @@ public class FlightsTab extends TabBase {
 		public void valueChanged(ListSelectionEvent e) {
 				Flight flightSelected = flightsList.getSelectedValue();
 				
-				if(flightSelected != null) {
+				try {
 					flightJField.setText(flightSelected.getCode());
 					airlineJField.setText(flightSelected.getAirlineName());
 					dayJField.setText(flightSelected.getWeekday());
@@ -376,9 +376,12 @@ public class FlightsTab extends TabBase {
 					}
 
 					costJField.setText("$" + flightSelected.getCostPerSeat());
-				} else {
-					JOptionPane.showMessageDialog(null, "No Flights were found");
-				}		
+				} catch (NullPointerException exception) {
+					flightJField.setText("");
+					airlineJField.setText("");
+					dayJField.setText("");
+					timeJField.setText("");
+				}
 		}
 	}
 
