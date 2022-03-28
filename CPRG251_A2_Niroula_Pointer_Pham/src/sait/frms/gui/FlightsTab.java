@@ -363,18 +363,22 @@ public class FlightsTab extends TabBase {
 		@Override
 		public void valueChanged(ListSelectionEvent e) {
 				Flight flightSelected = flightsList.getSelectedValue();
+				
+				if(flightSelected != null) {
+					flightJField.setText(flightSelected.getCode());
+					airlineJField.setText(flightSelected.getAirlineName());
+					dayJField.setText(flightSelected.getWeekday());
 
-				flightJField.setText(flightSelected.getCode());
-				airlineJField.setText(flightSelected.getAirlineName());
-				dayJField.setText(flightSelected.getWeekday());
+					if (flightSelected.getTime().length() == 4) {
+						timeJField.setText("0" + flightSelected.getTime() + "");
+					} else {
+						timeJField.setText(flightSelected.getTime() + "");
+					}
 
-				if (flightSelected.getTime().length() == 4) {
-					timeJField.setText("0" + flightSelected.getTime() + "");
+					costJField.setText("$" + flightSelected.getCostPerSeat());
 				} else {
-					timeJField.setText(flightSelected.getTime() + "");
-				}
-
-				costJField.setText("$" + flightSelected.getCostPerSeat());
+					JOptionPane.showMessageDialog(null, "No Flights were found");
+				}		
 		}
 	}
 
